@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-
     #region Variables
 
     private Rigidbody rb;
@@ -30,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask wallLayer = 0;
     private bool isWallJumpReadyLeft = false;
     private bool isWallJumpReadyRight = false;
+    [SerializeField] float yVelocityLimiter = 5;
     #endregion
 
     #region MonoBehaviour Methods
@@ -79,31 +79,37 @@ public class PlayerController : MonoBehaviour
 
     private void SetIsGrounded()
     {
-        Vector3 rayCenter = transform.position + (0.1f * playerDimension * transform.up);
+        Vector3 rayCenterR = transform.position + (transform.right * 0.4f * playerDimension) + (0.1f * playerDimension * transform.up);
+        Vector3 rayCenterL = transform.position + (-transform.right * 0.4f * playerDimension) + (0.1f * playerDimension * transform.up);
         Vector3 direction = -transform.up * isGroundedRayLength;
-        Debug.DrawRay(rayCenter, direction, Color.green);
 
-        isGrounded = Physics.Raycast(rayCenter, direction, out RaycastHit hit, isGroundedRayLength, groundLayer);
+        isGrounded = Physics.Raycast(rayCenterR, direction, out RaycastHit hit, isGroundedRayLength, groundLayer)
+            || Physics.Raycast(rayCenterL, direction, out hit, isGroundedRayLength, groundLayer);
     }
 
     private void SetIsWallJumpReady()
     {
-        Vector3 rayCenterLeft = transform.position - (0.4f * playerDimension * transform.right) + (0.1f * playerDimension * transform.up);
+        Vector3 rayCenterLeftUp = transform.position - (0.4f * playerDimension * transform.right) + (0.9f * playerDimension * transform.up);
+        Vector3 rayCenterLeftDown = transform.position - (0.4f * playerDimension * transform.right) + (0.1f * playerDimension * transform.up);
         Vector3 directionLeft = -transform.right * wallReadyRayLength;
 
-        Vector3 rayCenterRight = transform.position + (0.4f * playerDimension * transform.right) + (0.1f * playerDimension * transform.up);
+        Vector3 rayCenterRightUp = transform.position + (0.4f * playerDimension * transform.right) + (0.9f * playerDimension * transform.up);
+        Vector3 rayCenterRightDown = transform.position + (0.4f * playerDimension * transform.right) + (0.1f * playerDimension * transform.up);
         Vector3 directionRight = transform.right * wallReadyRayLength;
 
-        Debug.DrawRay(rayCenterRight, directionRight, Color.green);
-        Debug.DrawRay(rayCenterLeft, directionLeft, Color.green);
+        isWallJumpReadyRight = Physics.Raycast(rayCenterRightUp, directionRight, out RaycastHit hit, wallReadyRayLength, wallLayer)
+            || Physics.Raycast(rayCenterRightDown, directionRight, out hit, wallReadyRayLength, wallLayer);
 
-        isWallJumpReadyRight = Physics.Raycast(rayCenterRight, directionRight, out RaycastHit hitR, wallReadyRayLength, wallLayer);
-        isWallJumpReadyLeft = Physics.Raycast(rayCenterLeft, directionLeft, out RaycastHit hitL, wallReadyRayLength, wallLayer);
+        isWallJumpReadyLeft = Physics.Raycast(rayCenterLeftUp, directionLeft, out hit, wallReadyRayLength, wallLayer)
+            || Physics.Raycast(rayCenterLeftDown, directionLeft, out hit, wallReadyRayLength, wallLayer);
     }
 
     private void PlayerWallJump()
     {
         if (!(isWallJumpReadyLeft || isWallJumpReadyRight) || groundJumped)
+            return;
+
+        if (rbVelocity.y > yVelocityLimiter)
             return;
 
         if (Input.GetKeyDown(KeyCode.Space))
