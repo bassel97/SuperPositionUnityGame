@@ -15,6 +15,7 @@ public class CameraFollower : MonoBehaviour
     private void FixedUpdate()
     {
         transform.position = Vector3.Slerp(transform.position, followedObject.position + followOffset, followSpeed);
-        transform.LookAt(followedObject.position + lookAtOffset);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((followedObject.position + lookAtOffset) - transform.position), followSpeed);
+        //transform.LookAt(followedObject.position + lookAtOffset);
     }
 }
