@@ -2,10 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerController))]
 public class Player : MonoBehaviour
 {
 
+    private GameManager gameManager;
+    private PlayerController playerController;
 
+    private void Awake()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
+
+    public void SetGameManger(GameManager gameManager)
+    {
+        this.gameManager = gameManager;
+    }
+
+    public void Pause()
+    {
+        playerController.FreezePlayer();
+    }
+
+    public void Unpause()
+    {
+        playerController.UnfreezePlayer();
+    }
+
+    private void DestroyPlayer()
+    {
+        gameObject.SetActive(false);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,11 +40,13 @@ public class Player : MonoBehaviour
 
         if (otherTag.Equals("Goal"))
         {
-            Debug.Log("Win");
+            gameManager.PlayerWon();
+            playerController.FreezePlayer();
         }
         else if (otherTag.Equals("Trap"))
         {
-            Debug.Log("Lose");
+            gameManager.PlayerLost();
+            DestroyPlayer();
         }
     }
 

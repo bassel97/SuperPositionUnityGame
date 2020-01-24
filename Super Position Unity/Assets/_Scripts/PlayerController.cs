@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 rbVelocity;
+    private Vector3 savedVelocity;
 
     [SerializeField] private float playerDimension = 1.0f;
 
@@ -56,6 +57,20 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Methods
+    public void FreezePlayer()
+    {
+        //savedVelocity = rb.velocity;
+        rb.isKinematic = true;
+        enabled = false;
+    }
+
+    public void UnfreezePlayer()
+    {
+        rb.isKinematic = false;
+        enabled = true;
+        //rb.velocity = savedVelocity;
+    }
+
     private void MovePlayer()
     {
         float horzInput = Input.GetAxis("Horizontal");

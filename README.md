@@ -7,5 +7,6 @@ PlayerController created for:
 - Jumping when Grounded.
 - Wall Jump on contact.
 
-## Creating the split scene setup
-Two split screens each rendering its some of the obstacles
+## Creating the split screen scene setup
+Two split screens each rendering its some of the obstacles.
+A game manager to keep timer track.
