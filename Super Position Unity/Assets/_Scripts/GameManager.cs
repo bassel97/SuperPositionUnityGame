@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private float levelTimer = 0;
 
     [Header("UI")]
-    [SerializeField] private Text UI_timer;
+    [SerializeField] private Text UI_timer = null;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!gamePaused)
+        if (!gamePaused && !gameEnded)
         {
             levelTimer += Time.deltaTime;
         }
