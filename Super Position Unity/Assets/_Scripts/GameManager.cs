@@ -63,19 +63,19 @@ public class GameManager : MonoBehaviour
         EndGame();
     }
 
-    private void PauseGame()
+    public void PauseGame()
     {
         player.Pause();
         gamePaused = true;
     }
 
-    private void ResumeGame()
+    public void ResumeGame()
     {
         player.Unpause();
         gamePaused = false;
     }
 
-    private void EndGame()
+    public void EndGame()
     {
         gameEnded = true;
     }

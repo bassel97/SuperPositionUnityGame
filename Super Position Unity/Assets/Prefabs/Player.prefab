@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5791355041451006091}
-  - component: {fileID: 1116107006799631181}
   - component: {fileID: 1145954971}
   - component: {fileID: 1555267370301767580}
   - component: {fileID: 1145954970}
+  - component: {fileID: 1145954972}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -35,19 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1116107006799631181
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5791355041451006095}
-  m_Material: {fileID: 13400000, guid: b34ab3e960ccafe408e20a9c4f2412f0, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9, z: 0.9}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &1145954971
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -102,6 +89,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3584
   yVelocityLimiter: 3.5
+--- !u!135 &1145954972
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5791355041451006095}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &3452867107959806798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -157,42 +157,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 13700000, guid: c232e12d47b535b4eb2cdaacab6c0ad7, type: 3}
-      propertyPath: m_BlendShapeWeights.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 13700000, guid: c232e12d47b535b4eb2cdaacab6c0ad7, type: 3}
-      propertyPath: m_AABB.m_Center.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 13700000, guid: c232e12d47b535b4eb2cdaacab6c0ad7, type: 3}
-      propertyPath: m_AABB.m_Extent.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 13700000, guid: c232e12d47b535b4eb2cdaacab6c0ad7, type: 3}
-      propertyPath: m_AABB.m_Extent.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 13700000, guid: c232e12d47b535b4eb2cdaacab6c0ad7, type: 3}
-      propertyPath: m_AABB.m_Extent.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 13700000, guid: c232e12d47b535b4eb2cdaacab6c0ad7, type: 3}
-      propertyPath: m_DirtyAABB
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 13700000, guid: c232e12d47b535b4eb2cdaacab6c0ad7, type: 3}
+    - target: {fileID: 2300000, guid: c232e12d47b535b4eb2cdaacab6c0ad7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 42776f1849c4c8e49aa49b8e872b1873, type: 2}
-    - target: {fileID: 13700000, guid: c232e12d47b535b4eb2cdaacab6c0ad7, type: 3}
-      propertyPath: m_BlendShapeWeights.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 13700000, guid: c232e12d47b535b4eb2cdaacab6c0ad7, type: 3}
-      propertyPath: m_BlendShapeWeights.Array.data[1]
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c232e12d47b535b4eb2cdaacab6c0ad7, type: 3}
 --- !u!4 &3452867107959931342 stripped
